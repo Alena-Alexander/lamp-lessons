@@ -1,0 +1,4 @@
+{
+    "intelephense.environment.documentRoot": "/opt/php_manual/php-bigxhtml.html",
+    "php.validate.executablePath": "/usr/bin/php"
+}

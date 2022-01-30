@@ -1,0 +1,7 @@
+class room
+attributes; 
+    - color: paint
+    - closet: # of
+    - furnature: Array()
+    - windows: # of
+    - light: # of

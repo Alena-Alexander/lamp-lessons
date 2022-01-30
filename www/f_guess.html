@@ -1,0 +1,11 @@
+<form method="post" action="./guess.php">
+  <label for="f_guess"><h2>Is your number: <?php echo $guess; ?> </h2></label>
+  <select name="f_guess" id="f_guess">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  <input type="hidden" name="l_bound" value="<?php echo $l_bound; ?>">
+  <input type="hidden" name="r_bound" value="<?php echo $r_bound; ?>">
+  <input type="hidden" name="f_guess" value="<?php echo $f_guess; ?>">
+  <input type="submit" value="Submit">
+</form>
