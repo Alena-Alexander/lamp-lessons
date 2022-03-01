@@ -1096,41 +1096,8 @@ class User {
  
  ## Creating an Object
  To create an object with a specified class, use the new keyword, like this: $object = new Class. Here are a couple of ways in which we could do this:
+```php
     $object = new User;
     $temp   = new User('name', 'password');
-
-## Accessing Objects
-Let’s add a few lines to Example 5-10 and check the results. Example 5-11 extends the previous code by setting object properties and calling a method.
-
-### Example 5-11. Creating and interacting with an object
-```php
-  $object = new User;
-  print_r($object); echo "<br>";
-  $object->name     = "Joe";
-  $object->password = "mypass";
-  print_r($object); echo "<br>";
-  $object->save_user();
-  class User
-  {
-    public $name, $password;
-    function save_user()
-    {
-      echo "Save User code goes here";
-    }
-}
 ```
 
-## Cloning Objects
-Once you have created an object, it is passed by reference when you pass it as a parameter. In the matchbox metaphor, this is like keeping several threads attached to an object stored in a matchbox, so that you can follow any attached thread to access it.
-In other words, making object assignments does not copy objects in their entirety.
-
-### Example 5-12. Copying an object?
-```php
-$object1       = new User();
-  $object1->name = "Alice";
-  $object2       = $object1;
-  $object2->name = "Amy";
-  echo "object1 name = " . $object1->name . "<br>";
-  echo "object2 name = " . $object2->name;
-class User {
-    public $name;
