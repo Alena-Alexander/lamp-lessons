@@ -286,21 +286,203 @@
 //   $a3 = "gatES";
 //   echo $a1 . " " . $a2 . " " . $a3 . "<br>";
 //   fix_names($a1, $a2, $a3);
-//   echo $a1 . " " . $a2 . " " . $a3;
-//   function fix_names(&$n1, &$n2, &$n3)
-//   {
+//  /.;π¬ik,j,l./
 //     $n1 = ucfirst(strtolower($n1));
 //     $n2 = ucfirst(strtolower($n2));
 //     $n3 = ucfirst(strtolower($n3));
 // }
 
-$object = new User;
-  print_r($object);
+  //  $object1       = new User();
+  //  $object1->name = "Alice";
+  // $object2       = $object1;
+  //  $object2->name = "Amy";
+  // echo "object1 name = " . $object1->name . "<br>";
+  // echo "object2 name = " . $object2->name;
+  // class User {
+  //    public $name;
+  // }
 
-class User {
-    public $name, $password;
-    function save_user()
-    {
-      echo "Save User code goes here";
-    }
+// $object1       = new User();
+// $object1->name = "Alice";
+// $object2       = clone $object1;
+// $object2->name = "Amy";
+// echo "object1 name = " . $object1->name . "<br>";
+// echo "object2 name = " . $object2->name;
+// class User
+// {
+//   function __destruct()
+//   {
+//     // Destructor code goes here
+//   }
+// }
+
+// $object = new User;
+// $object->password = "secret";
+// echo $object->get_password();
+// class User
+//   {
+//     public $name, $password;
+
+//     function get_password()
+//     {
+//       return $this->password;
+//     }
+// }
+
+// $object1       = new User();
+// $object1->name = "Alice";
+// echo $object1->name;
+// class User {}
+// class Test
+// {
+//     public $name  = "Paul Smith"; // Valid
+//     public $age   = 42; // valid
+//     public $time  = time(); // invalid
+//     public $score = $level * 2; //invalid
+// }
+
+// Translate::lookup();
+//   class Translate
+//   {
+//     const ENGLISH = 0;
+//     const SPANISH = 1;
+//     const FRENCH  = 2;
+//     const GERMAN  = 3;
+//     // ...
+//     static function lookup()
+//     {
+//       echo self::SPANISH;
+//     }
+// }
+
+// class Example
+//   {
+//     var $name   = "Michael"; // Same as public but deprecated
+//     public $age = 23;        // Public property
+//     protected $usercount;    // Protected property
+//     private function admin() // Private method
+//     {
+//       // Admin code goes here
+//     }
+// }
+
+// User::pwd_string();
+// class User 
+// {
+//     static function pwd_string()
+//     {
+//       echo "Please enter your password";
+//     }
+// }
+
+// $temp = new Test();
+//   echo "Test A: " . Test::$static_property . "<br>";
+//   echo "Test B: " . $temp->get_sp()        . "<br>";
+//   echo "Test C: " . $temp->static_property . "<br>";
+
+// class Test 
+//  {
+//     static $static_property = "I'm static";
+
+//     function get_sp()
+//     {
+//        return self::$static_property;
+//     }
+//  } 
+
+//   $object           = new Subscriber;
+//   $object->name     = "Fred";
+//   $object->password = "pword";
+//   $object->phone    = "012 345 6789";
+//   $object->email    = "fred@bloggs.com";
+//   $object->display();
+
+// class User 
+// {
+//     public $name, $password;
+
+//     function save_user()
+//     {
+//       echo "Save User code goes here";
+//     }
+// }
+//   class Subscriber extends User
+//   {
+//     public $phone, $email;
+
+//     function display()
+//     {
+//       echo "Name:  " . $this->name     . "<br>";
+//       echo "Pass:  " . $this->password . "<br>";
+//       echo "Phone: " . $this->phone    . "<br>";
+//       echo "Email: " . $this->email;
+//     } 
+// }
+
+// $object = new Son;
+// $object->test();
+// $object->test2();
+
+// class Dad 
+// {
+//   function test()
+//   {
+//     echo "[Class Dad] I am your Father<br>";
+//   }
+// }
+
+// class Son extends Dad
+// {
+//   function test()
+//   {
+//     echo "[Class Son] I am Luke<br>";
+//   }
+// function test2()
+// {
+//   parent::test();
+// }
+// } 
+
+// $object = new Tiger();
+//   echo "Tigers have...<br>";
+//   echo "Fur: " . $object->fur . "<br>";
+//   echo "Stripes: " . $object->stripes;
+//   class Wildcat
+//   {
+//     public $fur; // Wildcats have fur
+//     function __construct()
+//     {
+//       $this->fur = "TRUE";
+//     }
+//   }
+//   class Tiger extends Wildcat
+//    {
+//     public $stripes; // Tigers have stripes
+//     function __construct()
+//     {
+//       parent::__construct(); // Call parent constructor first
+//       $this->stripes = "TRUE";
+//     }
+// } 
+
+// class User
+//   {
+//     final function copyright()
+//     {
+//       echo "This class was written by Joe Smith";
+//     }
+//   } 
+
+$object = new user();
+print_r($object);
+
+class user
+{
+  public $age, $name;
+  function save_user($age, $name);
+  {
+    this-> age = $age;
+    this-> name = $name;
+    echo "Users' info is saved..";
+  }
 }

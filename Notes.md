@@ -1068,28 +1068,51 @@ else {
 ```
 
 ## PHP Objects
-In much the same way that functions represent a huge increase in programming power over the early days of computing, where sometimes the best program naviga‐ tion available was a very basic GOTO or GOSUB statement, object-oriented programming (OOP) takes the use of functions to a whole new level.
-Once you get the hang of condensing reusable bits of code into functions, it’s not that great a leap to consider bundling the functions and their data into objects.
-Let’s take a social networking site that has many parts. One handles all user functions —that is, code to enable new users to sign up and existing users to modify their details. In standard PHP, you might create a few functions to handle this and embed some calls to the MySQL database to keep track of all the users.
-Imagine how much easier it would be to create an object to represent the current user. To do this, you could create a class, perhaps called User, that would contain all the code required for handling users and all the variables needed for manipulating the data within the class. Then, whenever you need to manipulate a user’s data, you could simply create a new object with the User class.
+In much the same way that functions represent a huge increase in programming power over the early days of computing, where sometimes the best program navigation available was a very basic GOTO or GOSUB statement, object-oriented programming (OOP) takes the use of functions to a whole new level. Once you get the hang of condensing reusable bits of code into functions, it’s not that great a leap to consider bundling the functions and their data into objects. Let’s take a social networking site that has many parts. One handles all user functions —that is, code to enable new users to sign up and existing users to modify their details. In standard PHP, you might create a few functions to handle this and embed some calls to the MySQL database to keep track of all the users. Imagine how much easier it would be to create an object to represent the current user. To do this,
 
+```text
+You could create a class, perhaps called User, that would contain all the code required for handling users and all the variables needed for manipulating the data within the class. Then, whenever you need to manipulate a user’s data, you could simply create a new object with the User class. When creating a program to use objects, you need to design a composite of data and code called a class. Each new object based on this class is called an instance (or occur‐ rence) of that class. The data associated with an object is called its properties; the functions it uses are called methods. In defining a class, you supply the names of its properties and the code for its methods.
 
-## Terminology
-When creating a program to use objects, you need to design a composite of data and code called a class. Each new object based on this class is called an instance (or occur‐ rence) of that class.
-The data associated with an object is called its properties; the functions it uses are called methods. In defining a class, you supply the names of its properties and the code for its methods. 
+-------------------------------
+
+class => object
+
+function => method => operation -> insinde the class doing things
+
+data => field variables inside the class -> define attributes about the object -> AKA => attributes => aka properties
+
+--------------------------------
+
+Example :
+
+class car (object)
+
+data(attributes)
+-door
+-make
+-ect
+
+function 
+-how attributes work
+
+-----------------------------------
+```
 
 ## Declaring a Class
 Before you can use an object, you must define a class with the class keyword. Class definitions contain the class name (which is case-sensitive), its properties, and its methods. 
 
 ### Example 5-10. Declaring a class and examining an object
+
 ```php
-$object = new User; // the method that a class needs in order to place an object onto a webserver //
+$object = new User(); // the method that a class needs in order to place an object onto a webserver //
   print_r($object);
 class User {
     public $name, $password;// porperties of the object //
-    function save_user()// method used to print the object //
+    function save_user($name, $password) // method used to print the object//
     {
-      echo "Save User code goes here";
+      this->name = $name;
+      this->password = $password;
+      echo "User info saved...";
     }
 }
 ```
@@ -1101,3 +1124,397 @@ class User {
     $temp   = new User('name', 'password');
 ```
 
+## Accessing Objects
+As you can see, the syntax for accessing an object’s property is $object->property. Likewise, you call a method like this: $object->method(). You should note that the example property and method do not have $ signs in front of them. If you were to preface them with $ signs, the code would not work, as it would try to reference the value inside a variable.
+
+### Example 5-11. Creating and interacting with an object
+```php
+<?php
+  $object = new User;
+  print_r($object); echo "<br>";
+
+  $object->name     = "Joe";
+  $object->password = "mypass";
+  print_r($object); echo "<br>";
+
+  $object->save_user();
+
+  class User
+  {
+    public $name, $password;
+    function save_user()
+    {
+      echo "Save User code goes here";
+    }
+} ?>
+```
+
+## Cloning Objects
+Once you have created an object, it is passed by reference when you pass it as a parameter. In the matchbox metaphor, this is like keeping several threads attached to an object stored in a matchbox, so that you can follow any attached thread to access it. In other words, making object assignments does not copy objects in their entirety. You’ll see how this works in Example 5-12, where we define a very simple User class with no methods and only the property name.
+
+
+### explaination:
+Here, we first create the object $object1 and assign the value Alice to the name prop‐ erty. Then we create $object2, assigning it the value of $object1, and assign the value Amy just to the name property of $object2—or so we might think. But this code outputs the following:
+### Example 5-12. Copying an object?
+```php
+<?php
+  $object1       = new User();
+  $object1->name = "Alice";
+  $object2       = $object1;
+  $object2->name = "Amy";
+
+  echo "object1 name = " . $object1->name . "<br>";
+  echo "object2 name = " . $object2->name;
+
+class User {
+    public $name;
+  }
+?>
+```
+
+To avoid this confusion, you can use the clone operator, which creates a new instance of the class and copies the property values from the original instance to the new instance. Example 5-13 illustrates this usage.
+
+### Example 5-13. Cloning an object
+```php
+<?php
+  $object1       = new User();
+  $object1->name = "Alice";
+  $object2       = clone $object1;
+  $object2->name = "Amy";
+  echo "object1 name = " . $object1->name . "<br>";
+  echo "object2 name = " . $object2->name;
+  class User {
+    public $name;
+  }
+?>
+```
+
+## Constructors
+When creating a new object, you can pass a list of arguments to the class being called. These are passed to a special method within the class, called the constructor, which initializes various properties. To do this you use the function name __construct (that is, construct preceded by two underscore characters), as in Example 5-14.
+
+### Example 5-14. Creating a constructor method
+```php
+<?php
+  class User
+  {
+    function __construct($param1, $param2)
+    {
+      // Constructor statements go here
+      public $username = "Guest";
+    }
+} ?>
+```
+
+## Destructors
+You also have the ability to create destructor methods. This ability is useful when code has made the last reference to an object or when a script reaches the end. Example 5-15 shows how to create a destructor method. The destructor can do clean- up such as releasing a connection to a database or some other resource that you reserved within the class. Because you reserved the resource within the class, you have to release it here, or it will stick around indefinitely. Many system-wide prob‐ lems are caused by programs reserving resources and forgetting to release them.
+
+### Example 5-15. Creating a destructor method
+```php
+<?php
+  class User
+  {
+    function __destruct()
+    {
+      // Destructor code goes here
+    }
+} ?>
+```
+
+## Writing Methods
+As you have seen, declaring a method is similar to declaring a function, but there are a few differences. For example, method names beginning with a double underscore (__) are reserved, and you should not create any of this form. You also have access to a special variable called $this, which can be used to access the current object’s properties. To see how it works, take a look at Example 5-16, which contains a different method from the User class definition called get_password.
+
+### Example 5-16. Using the variable $this in a method
+```php
+<?php
+  class User
+  {
+    public $name, $password;
+    function get_password()
+    {
+      return $this->password;
+    }
+} ?>
+```
+
+get_password uses the $this variable to access the current object and then return the value of that object’s password property. Note how the preceding $ of the property $password is omitted when we use the -> operator. Leaving the $ in place is a typical error you may run into, particularly when you first use this feature.
+
+### Here’s how you would use the class defined in Example 5-16:
+```php 
+$object = new User;
+
+$object->password = "secret";
+echo $object->get_password();
+```
+
+## Declaring Properties
+It is not necessary to explicitly declare properties within classes, as they can be implicitly defined when first used. To illustrate this, in Example 5-17 the class User has no properties and no methods but is legal code.
+
+### Example 5-17. Defining a property implicitly
+```php
+<?php
+  $object1       = new User();
+  $object1->name = "Alice";
+
+  echo $object1->name;
+
+  class User {}
+?>
+```
+
+### explanation: 
+This code correctly outputs the string Alice without a problem, because PHP implic‐ itly declares the property $object1->name for you. But this kind of programming can lead to bugs that are infuriatingly difficult to discover, because name was declared from outside the class.
+
+Also, when you declare a property within a class, you may assign a default value to it. The value you use must be a constant and not the result of a function or expression. Example 5-18 shows a few valid and invalid assignments. 
+
+### Example 5-18. Valid and invalid property declarations
+```php
+<?php
+  class Test
+  {
+    public $name  = "Paul Smith"; // Valid
+    public $age   = 42; // Valid
+    public $time  = time(); // Invalid - calls a function
+    public $score = $level * 2; // Invalid - uses an expression
+} ?>
+```
+
+## Declaring Constants
+In the same way that you can create a global constant with the define function, you can define constants inside classes. The generally accepted practice is to use upper‐ case letters to make them stand out, as in Example 5-19.
+
+### Example 5-19. Defining constants within a class
+```php 
+<?php
+  Translate::lookup();
+  class Translate
+  {
+    const ENGLISH = 0;
+    const SPANISH = 1;
+    const FRENCH  = 2;
+    const GERMAN  = 3;
+    // ...
+    static function lookup()
+    {
+      echo self::SPANISH;
+    }
+} ?>
+
+```
+
+## Property and Method Scope
+PHP provides three keywords for controlling the scope of properties and methods (members):
+
+### public
+Public members can be referenced anywhere, including by other classes and instances of the object. This is the default when variables are declared with the var or public keywords, or when a variable is implicitly declared the first time it is used. The keywords var and public are interchangeable because, although deprecated, var is retained for compatibility with previous versions of PHP. Methods are assumed to be public by default.
+
+### protected
+
+These members can be referenced only by the object’s class methods and those of any subclasses.
+
+### private
+
+These members can be referenced only by methods within the same class—not by subclasses.
+
+### Here’s how to decide which you need to use:
+
+• Use public when outside code should access this member and extending classes
+should also inherit it.
+
+• Use protected when outside code should not access this member but extending
+classes should inherit it.
+
+• Use private when outside code should not access this member and extending
+classes also should not inherit it.
+
+### Example 5-20. Changing property and method scope
+```php
+<?php
+  class Example
+  {
+    var $name   = "Michael"; // Same as public but deprecated
+    public $age = 23;        // Public property
+    protected $usercount;    // Protected property
+    private function admin() // Private method
+    {
+      // Admin code goes here
+    }
+} ?>
+```
+
+## Static Methods
+You can define a method as static, which means that it is called on a class, not on an object. A static method has no access to any object properties and is created and accessed as in Example 5-21.
+
+### Example 5-21. Creating and accessing a static method
+```php
+<?php
+  User::pwd_string();
+class User {
+    static function pwd_string()
+    {
+      echo "Please enter your password";
+    }
+} ?>
+```
+
+Note:
+ how we call the class itself, along with the static method, using a double colon (also known as the scope resolution operator), not ->. Static functions are useful for performing actions relating to the class itself, but not to specific instances of the class. You can see another example of a static method in Example 5-19.
+
+ ## Static Properties
+ Most data and methods apply to instances of a class. For example, in a User class, you want to do such things as set a particular user’s password or check when the user has been registered. These facts and operations apply separately to each user and there‐ fore use instance-specific properties and methods. But occasionally you’ll want to maintain data about a whole class. For instance, to report how many users are registered, you will store a variable that applies to the whole User class. PHP provides static properties and methods for such data.
+
+ ### Example 5-22. Defining a class with a static property
+ ```php
+ <?php
+  $temp = new Test();
+  echo "Test A: " . Test::$static_property . "<br>";
+  echo "Test B: " . $temp->get_sp()        . "<br>";
+  echo "Test C: " . $temp->static_property . "<br>";
+
+class Test 
+ {
+    static $static_property = "I'm static";
+
+    function get_sp()
+    {
+       return self::$static_property;
+    }
+ } 
+?>
+```
+
+Note: 
+When you run this code, it returns the following output:
+
+    Test A: I'm static
+    Test B: I'm static
+
+    Notice: Undefined property Test::$static_property Test C:
+
+This example shows that the property $static_property could be directly referenced from the class itself via the double colon operator in Test A. Also, Test B could obtain its value by calling the get_sp method of the object $temp, created from class Test. But Test C failed, because the static property $static_property was not accessible to the object $temp.
+
+### Inheritance
+Once you have written a class, you can derive subclasses from it. This can save lots of painstaking code rewriting: you can take a class similar to the one you need to write, extend it to a subclass, and just modify the parts that are different. You achieve this using the extends keyword.
+In Example 5-23, the class Subscriber is declared a subclass of User by means of the extends keyword.
+
+## Example 5-23. Inheriting and extending a class
+```php
+<?php
+  $object           = new Subscriber;
+  $object->name     = "Fred";
+  $object->password = "pword";
+  $object->phone    = "012 345 6789";
+  $object->email    = "fred@bloggs.com";
+  $object->display();
+
+class User 
+{
+    public $name, $password;
+
+    function save_user()
+    {
+      echo "Save User code goes here";
+    }
+}
+  class Subscriber extends User
+  {
+    public $phone, $email;
+
+    function display()
+    {
+      echo "Name:  " . $this->name     . "<br>";
+      echo "Pass:  " . $this->password . "<br>";
+      echo "Phone: " . $this->phone    . "<br>";
+      echo "Email: " . $this->email;
+    } 
+}
+?>
+```
+
+### The parent keyword
+If you write a method in a subclass with the same name as one in its parent class, its statements will override those of the parent class. Sometimes this is not the behavior you want, and you need to access the parent’s method. To do this, you can use the parent operator, as in Example 5-24.
+
+## Example 5-24. Overriding a method and using the parent operator
+```php
+<?php
+  $object = new Son;
+  $object->test();
+  $object->test2();
+
+class Dad 
+{
+    function test()
+    {
+      echo "[Class Dad] I am your Father<br>";
+    }
+}
+
+  class Son extends Dad
+  {
+    function test()
+    {
+      echo "[Class Son] I am Luke<br>";
+    }
+  function test2()
+  {
+    parent::test();
+  }
+} 
+?>
+```
+
+explanation: 
+This code creates a class called Dad and a subclass called Son that inherits its proper‐ ties and methods, and then overrides the method test. Therefore, when line 2 calls the method test, the new method is executed. The only way to execute the overrid‐ den test method in the Dad class is to use the parent operator, as shown in function test2 of class Son. The code outputs the following:
+
+    [Class Son] I am Luke
+    [Class Dad] I am your Father
+
+### Subclass constructors
+When you extend a class and declare your own constructor, you should be aware that PHP will not automatically call the constructor method of the parent class. If you want to be certain that all initialization code is executed, subclasses should always call the parent constructors, as in Example 5-25.
+
+## Example 5-25. Calling the parent class constructor
+```php
+<?php
+  $object = new Tiger();
+  echo "Tigers have...<br>";
+  echo "Fur: " . $object->fur . "<br>";
+  echo "Stripes: " . $object->stripes;
+  class Wildcat
+  {
+    public $fur; // Wildcats have fur
+    function __construct()
+    {
+      $this->fur = "TRUE";
+    }
+  }
+  class Tiger extends Wildcat
+   {
+    public $stripes; // Tigers have stripes
+    function __construct()
+    {
+      parent::__construct(); // Call parent constructor first
+      $this->stripes = "TRUE";
+    }
+} ?>
+```
+
+explanation:
+This example takes advantage of inheritance in the typical manner. The Wildcat class has created the property $fur, which we’d like to reuse, so we create the Tiger class to inherit $fur and additionally create another property, $stripes. To verify that both constructors have been called, the program outputs the following:
+
+    Tigers have...
+    Fur: TRUE
+    Stripes: TRUE
+
+### Final methods
+When you wish to prevent a subclass from overriding a superclass method, you can use the final keyword. Example 5-26 shows how.
+
+## Example 5-26. Creating a final method
+```php
+<?php
+  class User
+  {
+    final function copyright()
+    {
+      echo "This class was written by Joe Smith";
+    }
+  } 
+?>
+```
