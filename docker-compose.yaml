@@ -9,7 +9,7 @@
 version: "3.7"
 services:  
 ########################################## MYSQL Database #########################################
-  db:
+  db:  # TODO: example todo note
     # https://hub.docker.com/r/mysql/mysql-server
     # https://hub.docker.com/r/arm64v8/mariadb
     image: mysql:8.0.23   # Enter your image <Name>:<Tag>
