@@ -906,6 +906,7 @@ The general syntax for a function is as follows:
 function function_name([parameter [, ...]]) {
 // Statements }
 
+```
 The first line of the syntax indicates the following:
 
 • A definition starts with the word function.

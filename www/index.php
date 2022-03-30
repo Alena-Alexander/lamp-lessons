@@ -473,16 +473,165 @@
 //     }
 //   } 
 
-$object = new user();
-print_r($object);
+// $object = new user();
+// print_r($object);
 
-class user
+// class user
+// {
+//   public $age, $name;
+//   function save_user($age, $name);
+//   {
+//     this-> age = $age;
+//     this-> name = $name;
+//     echo "Users' info is saved..";
+//   }
+// }
+// class User
+// {
+//   public $name, $password;
+
+//   /**
+//    * creates the object youve created for
+//    * @param mixed $username 
+//    * @param mixed $password 
+//    * @return void 
+//    */
+//   public function __construct($username = null,  $password = null)
+//   {
+//     $this->name = $username;
+//     $this ->password = $password;
+//   }
+//   /**
+//    * Saves the username and password.
+//    * @param mixed $username 
+//    * @param mixed $password 
+//    * @return void 
+//    */
+//   function save_user($username, $password)
+//   {
+//     $this->name = $username;
+//     $this->password = $password;
+//     echo "Save successful...<br>";
+//   }
+// }
+
+
+//  $object = new User("john", "mypass");
+
+// print_r($object); echo "<br>";
+
+// $object->save_user("nick", "mypass");
+
+// print_r($object); echo "<br>";
+
+// /**
+//  * This class creates a CUP. I am not the real cup but a blueprint of 
+//  * how to create the cup in code.
+//  * @package Cup
+//  */
+// class Cup {
+//   private $height, $width, $diameter, $color, $materials;
+//   private bool $handle;
+// /**
+//  * A function that allows you to add values to the properties of an object
+//  * @param string $height 
+//  * @param string $width 
+//  * @param string $diameter 
+//  * @param string $handle 
+//  * @param string $color 
+//  * @param string $materials 
+//  * @return void 
+//  */
+//   public function __construct($height = "", $width = "", $diameter = "", $handle = "", $color = "", $materials =  "")
+//   {
+//     $this->height = $height;
+//     $this->width = $width;
+//     $this->diameter = $diameter;
+//     $this->handle = $handle;
+//     $this->color = $color;
+//     $this->materials = $materials;
+//   }
+//   /**
+//    * An easy way to print the objects parameters but more neatly.
+//    * @return string 
+//    */
+//   public function __toString()
+//   {
+//     return @"Cup - <br>
+//     {<br>
+//       Height: $this->height inches, <br>
+//       Width: $this->width inches, <br>
+//       Diameter: $this->diameter inches, <br>
+//       Handle: $this->handle, <br>
+//       Color: $this->color <br>
+//       Materials: $this->materials <br>
+//     }";
+//   }
+// }
+
+
+
+// $mug2 = new Cup(5, 4, 3, true, "blue", "glass");
+
+
+// printf("<br><br>");
+// printf($mug2);
+
+//   $object1       = new User();
+//   $object1->name = "Alice";
+//   $object2       = $object1;
+//   $object2->name = "Amy";
+
+//   echo "object1 name = " . $object1->name . "<br>";
+//   echo "object2 name = " . $object2->name;
+
+// class User {
+//     public $name;
+//   }
+
+$object = new picture;
+print_r($picture);
+
+class picture
 {
-  public $age, $name;
-  function save_user($age, $name);
-  {
-    this-> age = $age;
-    this-> name = $name;
-    echo "Users' info is saved..";
-  }
+    public $size;
+    public $image;
+    public $filter;
+
+    function set_size($size){
+      $this->size = $size;
+    }
+
+    function get_size(){
+      return $this-> size;
+    }
+
+    function set_image($image) {
+      $this->image=$image;
+    }
+
+    function get_image() {
+      return $this->image;
+    }
+
+    function set_filter($filter) {
+      $this->filter=$filter;
+    }
+
+    function get_filter() {
+      return $this->filter;
+    }
 }
+
+$size = new picture();
+$image = new picture();
+$filter = new picture();
+$size->set_size("medium");
+$image->set_image("smol");
+$filter->set_filter("blackandwhite");
+
+echo $size->get_size();
+echo "<br>";
+echo $image->get_image();
+echo "<br>";
+echo $filter->get_filter();
