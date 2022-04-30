@@ -484,26 +484,28 @@ Operator precedence determines how operators are parsed concerning each other.
 
 ### Table 4-2. The precedence of PHP operators (high to low)
 ---
-| Operator(s) | Type |
-| -- | -- | 
-| () | Parentheses |
-| ++ -- | Increment/decrement |
-| ! | Logical |
-| * / % | Arithmetic |
-| + - . | Arithmetic and string |
-| << >> | Bitwise | 
-| < <= > >= <> | Comparison |
-| == != === !== | Comparison |
-| & | Bitwise (and references) |
-| ^ | Bitwise |
-| \| | Bitwise |
-| && | Logical | 
-| \|\| |  logical |
-| ? : | ternary |
-| = += -= *= /= .= %= &= != ^= <<= >>= |Assignment 
-| and | logical | 
-| xor | logical |
-|or | logical |
+
+| Operator(s)                      | Type                    |
+|----------------------------------|-------------------------|
+| ()                               | Parentheses             |
+| ++ --                            | Increment/decrement     |
+| !                                | Logical                 |
+| * / %                            | Arithmetic              |
+| + - .                            | Arithmetic and string   |
+| << >>                            | Bitwise                 | 
+| < <= > >= <>                     | Comparison              |
+| == != === !==                    | Comparison              |
+| &                                | Bitwise (and references) |
+| ^                                | Bitwise                 |
+| \&vert                    | Bitwise                  |
+| &&                               | Logical                 | 
+| \                                | logical                 |
+| ? :                              | ternary                 |
+| = += -= *= /= .= %= &= != ^= <<= >>= | Assignment              |
+| and                              | logical                 | 
+| xor                              | logical                 |
+| or                               | logical                 |
+
 ---
 
 ## Associativity
@@ -777,7 +779,7 @@ An operator used for when you want to avoid verbosity of the if and else operato
 ## Looping
 Code that you can use to execute a code block multiple times.
 
-## while loops
+## While loops
 Loops that you can use to execute a block code as long as its been executed before.
 
 ### Example 4-28. A while loop
@@ -877,10 +879,11 @@ a dynamic linker is a special part of an operating system that loads external sh
 linking that calls the external files as needed during execution.
 
 # CHAPTER 5
-The basic requirements of any programming language include somewhere to store data, a means of directing program flow, and a fext output. PHP has all these, plus tools like else and elseif to make lifw bits and pieces such as expression evaluation, file management, and tee easier. 
-
-Objects take this concept a step further. An object incorporates one or more functions, and the data they use, into a single structure called a class. In this chapter, you’ll learn all about using functions, from defining and calling them to passing arguments back and forth. With that knowledge under your belt, you’ll start creating functions and using them in your own objects (where they will be referred to as methods).
-
+The basic requirements of any programming language include somewhere to store data, a means of directing program flow, and , and a few bits and pieces such as expression
+evaluation, file management, and text output. PHP has all these, plus tools like else
+and elseif to make life easier. But even with all these in your toolkit, programming
+can be clumsy and tedious, especially if you have to rewrite portions of very similar
+code each time you need them.
 ## PHP Functions
 PHP comes with hundreds of ready-made, built-in functions, making it a very rich language. To use a function, call it by name.
 
@@ -893,7 +896,7 @@ The parentheses tell PHP that you’re referring to a function. Otherwise, it th
 ### Example 5-1. Three string functions
 ```
 <?php
-  echo strrev(" .dlrow olleH"); // Reverse string
+  echo strrev(" .dlrow olleH"); // Reverse string   
   echo str_repeat("Hip ", 2);   // Repeat string
   echo strtoupper("hooray!");   // String to uppercase
 ?>
@@ -1021,6 +1024,10 @@ Recap of Variable Scope
 :
 Local variables are accessible just from the part of your code where you define
 them. If they’re outside of a function, they can be accessed by all code outside of functions, classes, and so on. If a variable is inside a function, only that function can access the variable, and its value is lost when the function returns.
+
+• Local variables are accessible just from the part of your code where you define
+them. If they’re outside of a function, they can be accessed by all code outside of functions, classes, and so on. If a variable is inside a function, only that function
+can access the variable, and its value is lost when the function returns.
 
 • Global variables are accessible from all parts of your code.
 
@@ -1154,7 +1161,7 @@ As you can see, the syntax for accessing an object’s property is $object->prop
 Once you have created an object, it is passed by reference when you pass it as a parameter. In the matchbox metaphor, this is like keeping several threads attached to an object stored in a matchbox, so that you can follow any attached thread to access it. In other words, making object assignments does not copy objects in their entirety. You’ll see how this works in Example 5-12, where we define a very simple User class with no methods and only the property name.
 
 
-### explaination:
+### Explaination:
 Here, we first create the object $object1 and assign the value Alice to the name prop‐ erty. Then we create $object2, assigning it the value of $object1, and assign the value Amy just to the name property of $object2—or so we might think. But this code outputs the following:
 ### Example 5-12. Copying an object?
 ```php
@@ -1262,11 +1269,13 @@ It is not necessary to explicitly declare properties within classes, as they can
 ?>
 ```
 
-### explanation: 
+### Explanation: 
 This code correctly outputs the string Alice without a problem, because PHP implic‐ itly declares the property $object1->name for you. But this kind of programming can lead to bugs that are infuriatingly difficult to discover, because name was declared from outside the class.
 
 Also, when you declare a property within a class, you may assign a default value to it. The value you use must be a constant and not the result of a function or expression. Example 5-18 shows a few valid and invalid assignments. 
 
+To help yourself and anyone else who will maintain your code, I advise that you get
+into the habit of always declaring your properties explicitly within classes.
 ### Example 5-18. Valid and invalid property declarations
 ```php
 <?php
@@ -1304,14 +1313,14 @@ In the same way that you can create a global constant with the define function, 
 ## Property and Method Scope
 PHP provides three keywords for controlling the scope of properties and methods (members):
 
-### public
+### Public
 Public members can be referenced anywhere, including by other classes and instances of the object. This is the default when variables are declared with the var or public keywords, or when a variable is implicitly declared the first time it is used. The keywords var and public are interchangeable because, although deprecated, var is retained for compatibility with previous versions of PHP. Methods are assumed to be public by default.
 
-### protected
+### Protected
 
 These members can be referenced only by the object’s class methods and those of any subclasses.
 
-### private
+### Private
 
 These members can be referenced only by methods within the same class—not by subclasses.
 
@@ -1392,6 +1401,7 @@ When you run this code, it returns the following output:
 
 This example shows that the property $static_property could be directly referenced from the class itself via the double colon operator in Test A. Also, Test B could obtain its value by calling the get_sp method of the object $temp, created from class Test. But Test C failed, because the static property $static_property was not accessible to the object $temp.
 
+
 ### Inheritance
 Once you have written a class, you can derive subclasses from it. This can save lots of painstaking code rewriting: you can take a class similar to the one you need to write, extend it to a subclass, and just modify the parts that are different. You achieve this using the extends keyword.
 In Example 5-23, the class Subscriber is declared a subclass of User by means of the extends keyword.
@@ -1429,7 +1439,11 @@ class User
 }
 ?>
 ```
-
+The original User class has two properties, $name and $password, and a method to
+save the current user to the database. Subscriber extends this class by adding an
+additional two properties, $phone and $email, and includes a method of displaying
+the properties of the current object using the variable $this, which refers to the cur‐
+rent values of the object being accessed.
 ### The parent keyword
 If you write a method in a subclass with the same name as one in its parent class, its statements will override those of the parent class. Sometimes this is not the behavior you want, and you need to access the parent’s method. To do this, you can use the parent operator, as in Example 5-24.
 
@@ -1497,7 +1511,7 @@ When you extend a class and declare your own constructor, you should be aware th
 } ?>
 ```
 
-explanation:
+Explanation:
 This example takes advantage of inheritance in the typical manner. The Wildcat class has created the property $fur, which we’d like to reuse, so we create the Tiger class to inherit $fur and additionally create another property, $stripes. To verify that both constructors have been called, the program outputs the following:
 
     Tigers have...

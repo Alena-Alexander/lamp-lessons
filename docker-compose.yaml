@@ -8,77 +8,77 @@
 #
 version: "3.7"
 services:  
-########################################## MYSQL Database #########################################
-  db:  # TODO: example todo note
-    # https://hub.docker.com/r/mysql/mysql-server
-    # https://hub.docker.com/r/arm64v8/mariadb
-    image: mysql:8.0.23   # Enter your image <Name>:<Tag>
-    init: true                            
-    container_name: db
-    ########################### Define you ENVIRONMENT Variables ##################################
-    environment:
-      # Define history file
-      MYSQL_HISTFILE: '/var/log/.mysql_history'
-      # MySQL allow empty password variable
-      #MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      # Name of the database
-      MYSQL_DATABASE: 'lamp'
-      # MYSQL_HOST: which is known to cause issues when used with this image; DO NOT INCLUDE
-      #MYSQL_HOST: '<hostname>'
-      # Provide a username for your MySQL instance
-      MYSQL_USER: 'alena'
-      # Provide a password for your MySQL instance
-      MYSQL_PASSWORD: 'developer'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'developer'
-    ################################ Define you Volume Bind Mounts ################################
-    volumes: #- <HOST>:<CONTAINER>
-      - ./mysql:/var/lib/mysql           # Linux/Mac OS: [REQUIRED] MySQL Data directory
-      - ./mysql_logs:/var/log        # Linux/Mac OS: [OPTIONAL] MySQL Log directory
-    # Uncomment your restart policy
-    #restart: "no"                        # [OPTIONAL] On failure do not restart
-    #restart: always                      # [OPTIONAL] Always restart, even after system shutdown
-    restart: on-failure                   # [OPTIONAL] Best the restart on failure
-    #restart: unless-stopped              # [OPTIONAL]  
-    ##################################### Define and Expose Your Ports ############################
-    # Expose AND Define <INTERNAL>:<EXTERNAL> container ports to support your services
-    expose:
-      - 3306
-    ports:  # <host>:<container>
-      - 3306:3306
-      - 33060:33060
-      - 33061:33061
-    ########################### Define Network Protocols ##########################################
-    networks:
-      lamp-network:
-        ipv4_address: 172.16.238.9    # IPv4 Default Gateway  172.16.238.1
-        #ipv6_address: 2001:3984:3989::9   # IPv6 Default Gateway
-    ####################### Run Commands after the container starts ############################### 
-    #command: ["--default-authentication-plugin=mysql_native_password"]
-    #command: ["mysqld --verbose --help"]
-########################## Adminer : Standalone DBMS Formally PHPMyAdmin ##########################
-  adminer:
-    # https://hub.docker.com/r/arm64v8/adminer/
-    # http://docs.docker.oeynet.com/samples/library/adminer/
-    #  https://github.com/vrana/adminer/tree/master/plugins
-    image:  adminer:standalone
-    container_name: adminer    
-    environment:
-      ADMINER_DEFAULT_SERVER: db # The Name DB service defined above.
-    #restart: "no"
-    #restart: always
-    restart: on-failure
-    #restart: unless-stopped
-    ports: # <host>:<container>
-      - 30002:8080
-    networks:
-      lamp-network:
-        ipv4_address: 172.16.238.8      # default gateway  172.16.238.1
-    links: 
-      - db
-    depends_on:
-      - db
-    #command: [ "apt-get install -y tcl-tls tcl8.6-tdbc-mysql mysql-common" ]
+########################################### MYSQL Database #########################################
+#  db:  # TODO: example todo note
+#    # https://hub.docker.com/r/mysql/mysql-server
+#    # https://hub.docker.com/r/arm64v8/mariadb
+#    image: mysql:8.0.23   # Enter your image <Name>:<Tag>
+#    init: true
+#    container_name: db
+#    ########################### Define you ENVIRONMENT Variables ##################################
+#    environment:
+#      # Define history file
+#      MYSQL_HISTFILE: '/var/log/.mysql_history'
+#      # MySQL allow empty password variable
+#      #MYSQL_ALLOW_EMPTY_PASSWORD: 1
+#      # Name of the database
+#      MYSQL_DATABASE: 'lamp'
+#      # MYSQL_HOST: which is known to cause issues when used with this image; DO NOT INCLUDE
+#      #MYSQL_HOST: '<hostname>'
+#      # Provide a username for your MySQL instance
+#      MYSQL_USER: 'alena'
+#      # Provide a password for your MySQL instance
+#      MYSQL_PASSWORD: 'developer'
+#      # Password for root access
+#      MYSQL_ROOT_PASSWORD: 'developer'
+#    ################################ Define you Volume Bind Mounts ################################
+#    volumes: #- <HOST>:<CONTAINER>
+#      - ./mysql:/var/lib/mysql           # Linux/Mac OS: [REQUIRED] MySQL Data directory
+#      - ./mysql_logs:/var/log        # Linux/Mac OS: [OPTIONAL] MySQL Log directory
+#    # Uncomment your restart policy
+#    #restart: "no"                        # [OPTIONAL] On failure do not restart
+#    #restart: always                      # [OPTIONAL] Always restart, even after system shutdown
+#    restart: on-failure                   # [OPTIONAL] Best the restart on failure
+#    #restart: unless-stopped              # [OPTIONAL]
+#    ##################################### Define and Expose Your Ports ############################
+#    # Expose AND Define <INTERNAL>:<EXTERNAL> container ports to support your services
+#    expose:
+#      - 3306
+#    ports:  # <host>:<container>
+#      - 3306:3306
+#      - 33060:33060
+#      - 33061:33061
+#    ########################### Define Network Protocols ##########################################
+#    networks:
+#      lamp-network:
+#        ipv4_address: 172.16.238.9    # IPv4 Default Gateway  172.16.238.1
+#        #ipv6_address: 2001:3984:3989::9   # IPv6 Default Gateway
+#    ####################### Run Commands after the container starts ###############################
+#    #command: ["--default-authentication-plugin=mysql_native_password"]
+#    #command: ["mysqld --verbose --help"]
+########################### Adminer : Standalone DBMS Formally PHPMyAdmin ##########################
+#  adminer:
+#    # https://hub.docker.com/r/arm64v8/adminer/
+#    # http://docs.docker.oeynet.com/samples/library/adminer/
+#    #  https://github.com/vrana/adminer/tree/master/plugins
+#    image:  adminer:standalone
+#    container_name: adminer
+#    environment:
+#      ADMINER_DEFAULT_SERVER: db # The Name DB service defined above.
+#    #restart: "no"
+#    #restart: always
+#    restart: on-failure
+#    #restart: unless-stopped
+#    ports: # <host>:<container>
+#      - 30002:8080
+#    networks:
+#      lamp-network:
+#        ipv4_address: 172.16.238.8      # default gateway  172.16.238.1
+#    links:
+#      - db
+#    depends_on:
+#      - db
+#    #command: [ "apt-get install -y tcl-tls tcl8.6-tdbc-mysql mysql-common" ]
 ####################################### PHP #######################################################   
   php:
     # https://hub.docker.com/r/arm64v8/php/

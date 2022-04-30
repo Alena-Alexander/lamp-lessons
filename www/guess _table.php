@@ -1,4 +1,4 @@
 <?php
-function guess_table() {
-  
-}
+//function guess_table() {
+//
+//}
